@@ -7,13 +7,16 @@
  */
 
 const CONFIG = {
-    // Reemplaza esto con tu Client ID real de PayPal Developer Dashboard
-    PAYPAL_CLIENT_ID: 'AbZtT77yOz423yGseI9k5snmsXT_-hBvsFNJ_6BBRAU56yJ-EsGDWR9kYqgQyne4ILNRS4OCBh3fEspD',
+    // Configuración de contacto
+    WHATSAPP: {
+        NUMBER: '593963947466', // Formato internacional sin '+'
+        MESSAGE: 'Hola, deseo adquirir la Guía Bluetooth Educativa.'
+    },
 
     // Configuración del producto
     PRODUCT: {
-        NAME: 'Bluetooth Jammer Guide PDF',
-        PRICE: '19.99',
+        NAME: 'Guía Bluetooth Educativa (PDF)',
+        PRICE: '1.99',
         CURRENCY: 'USD'
     }
 };
