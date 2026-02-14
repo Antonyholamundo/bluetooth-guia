@@ -1,0 +1,120 @@
+/* Global Styles & Animations */
+:root {
+    --neon-cyan: #00f3ff;
+    --neon-green: #39ff14;
+    --tech-dark: #0a0a0a;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* 1. Fade-in Animation on Scroll */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* 2. Button Hover Animations */
+.btn-animate {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-animate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-animate::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-animate:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 3. Tech Glow Effects */
+.tech-glow {
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.tech-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+    border-color: var(--neon-cyan);
+}
+
+/* 4. Specs Table / Tech Card Neon Borders */
+.tech-card-neon {
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-card-neon:hover {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+}
+
+/* 5. PayPal Container Styles */
+#paypal-button-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+
+/* 6. Legal Disclaimer Warning */
+.legal-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.legal-warning::before {
+    content: '⚠️';
+    margin-right: 0.5rem;
+}
+
+/* 7. Mobile First Adjustments */
+@media (max-width: 640px) {
+    .legal-warning {
+        font-size: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    h1 {
+        font-size: 2.5rem !important;
+        /* Override needed for very small screens */
+    }
+}

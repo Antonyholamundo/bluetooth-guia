@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Aprende a construir tu propio Jammer Bluetooth. Guía paso a paso en PDF para entusiastas de la electrónica.">
+    <meta name="keywords" content="curso electrónica, jammer bluetooth, tutorial pdf, proyectos arduino, esp32">
+    <meta name="author" content="Ecuaplus Logic">
+    <title>Guía Jammer Bluetooth | Aprende Electrónica Práctica</title>
+
+    <!-- Tailwind CSS (Standard Configuration) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#f59e0b', // Amber for CTAs
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur fixed w-full z-50 border-b border-gray-100 shadow-sm fade-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold">J
+                    </div>
+                    <span class="font-bold text-xl text-brand-900 tracking-tight">Jammer<span
+                            class="text-brand-600">Guide</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#aprenderas" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">¿Qué
+                        aprenderás?</a>
+                    <a href="#temario"
+                        class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Temario</a>
+                    <a href="#faq"
+                        class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Preguntas</a>
+                </div>
+                <a href="#comprar"
+                    class="bg-brand-600 text-white px-5 py-2.5 rounded-full font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-700 transition-all hover:-translate-y-0.5 transform">
+                    Descargar Guía
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden fade-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="relative z-10">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        Nueva Edición 2026
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] mb-6">
+                        Domina la señal <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-cyan-500">Bluetooth</span>
+                        con tus manos.
+                    </h1>
+                    <p class="text-xl text-gray-500 mb-8 leading-relaxed max-w-lg">
+                        Una guía práctica paso a paso para construir tu propio dispositivo de prueba. Ideal para
+                        estudiantes y entusiastas de la seguridad electrónica.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#comprar"
+                            class="px-8 py-4 bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-xl shadow-xl shadow-orange-500/20 transition-all text-center flex items-center justify-center gap-2">
+                            <span>Obtener la Guía por $19.99</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#temario"
+                            class="px-8 py-4 bg-white hover:bg-gray-50 text-gray-700 font-semibold border border-gray-200 rounded-xl transition-all text-center shadow-sm">
+                            Ver Contenido
+                        </a>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-400 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Pago único y acceso de por vida
+                    </p>
+                </div>
+
+                <!-- Hero Image Placeholder / Visual -->
+                <div class="relative lg:h-[600px] flex items-center justify-center">
+                    <!-- Decorative blob -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-blue-200 to-cyan-200 rounded-full blur-3xl opacity-50">
+                    </div>
+
+                    <!-- Card Mockup -->
+                    <div
+                        class="relative bg-white p-6 rounded-2xl shadow-2xl border border-gray-100 w-full max-w-md transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div
+                            class="bg-gray-100 rounded-xl h-48 w-full mb-6 flex items-center justify-center overflow-hidden">
+                            <!-- Simple Abstract Cover Art -->
+                            <div
+                                class="w-full h-full bg-brand-900 flex flex-col items-center justify-center text-center p-4">
+                                <span class="text-brand-500 font-bold tracking-widest text-xs uppercase mb-2">Manual
+                                    Técnico</span>
+                                <h3 class="text-white text-2xl font-bold">Bluetooth Jammer<br>Construction Guide</h3>
+                                <div class="mt-4 w-12 h-1 bg-brand-500"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-4 bg-gray-100 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-100 rounded w-1/2"></div>
+                            <div class="h-4 bg-gray-100 rounded w-5/6"></div>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center bg-blue-50 p-4 rounded-xl">
+                            <div>
+                                <p class="text-xs text-blue-600 font-semibold uppercase">Formato Digital</p>
+                                <p class="text-lg font-bold text-gray-900">PDF + Código</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-full shadow-sm">
+                                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust / Benefit Section -->
+    <section id="aprenderas" class="py-20 bg-white fade-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold uppercase tracking-wider text-sm">¿Por qué este manual?</span>
+                <h2 class="mt-3 text-3xl font-extrabold text-gray-900 sm:text-4xl">Todo lo que necesitas para tu
+                    proyecto</h2>
+                <p class="mt-4 text-lg text-gray-500">
+                    Olvida los foros confusos y los videos incompletos. Aquí tienes la ruta directa para entender y
+                    construir.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div
+                    class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow tech-card-neon">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Paso a Paso Real</h3>
+                    <p class="text-gray-600 leading-relaxed">Instrucciones claras desde la compra de componentes hasta
+                        la carga del código final.</p>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6 text-purple-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Código Explicado</h3>
+                    <p class="text-gray-600 leading-relaxed">No solo copies y pegues. Entiende cómo funciona el firmware
+                        y cómo modificarlo.</p>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6 text-orange-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Educativo y Seguro</h3>
+                    <p class="text-gray-600 leading-relaxed">Enfocado en el aprendizaje de protocolos de comunicación y
+                        seguridad inalámbrica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus / Curriculum Section -->
+    <section id="temario" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Lo que encontrarás dentro</h2>
+                <p class="mt-4 text-gray-500">Un vistazo rápido al índice de contenidos.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 divide-y divide-gray-100 overflow-hidden">
+                <div class="p-6 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                    <span
+                        class="flex-shrink-0 w-8 h-8 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Fundamentos de Bluetooth</h4>
+                        <p class="text-gray-500 text-sm mt-1">Cómo funciona el espectro 2.4GHz y los canales de
+                            comunicación.</p>
+                    </div>
+                </div>
+                <div class="p-6 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                    <span
+                        class="flex-shrink-0 w-8 h-8 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center font-bold text-sm">2</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Selección de Hardware</h4>
+                        <p class="text-gray-500 text-sm mt-1">ESP32 vs Arduino + Módulos RF. Lista de compras
+                            recomendada y económica.</p>
+                    </div>
+                </div>
+                <div class="p-6 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                    <span
+                        class="flex-shrink-0 w-8 h-8 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center font-bold text-sm">3</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Esquemáticos y Conexiones</h4>
+                        <p class="text-gray-500 text-sm mt-1">Diagramas de cableado claros para evitar cortocircuitos y
+                            errores comunes.</p>
+                    </div>
+                </div>
+                <div class="p-6 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                    <span
+                        class="flex-shrink-0 w-8 h-8 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center font-bold text-sm">4</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Programación del Firmware</h4>
+                        <p class="text-gray-500 text-sm mt-1">Configuración del IDE, librerías necesarias y explicación
+                            del código línea por línea.</p>
+                    </div>
+                </div>
+                <div class="p-6 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                    <span
+                        class="flex-shrink-0 w-8 h-8 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center font-bold text-sm">5</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Pruebas Responsables</h4>
+                        <p class="text-gray-500 text-sm mt-1">Cómo verificar el funcionamiento en un entorno controlado
+                            y ético.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="comprar" class="py-24 bg-brand-900 text-white relative overflow-hidden fade-in-section">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+        </div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-600 rounded-full blur-3xl opacity-50"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">¿Listo para empezar tu proyecto?</h2>
+                    <p class="text-brand-100 text-lg mb-8 max-w-md">
+                        Obtén acceso inmediato a todo el material. Sin suscripciones mensuales, solo un pago único para
+                        apoyar el desarrollo de más contenido.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Descarga instantánea del PDF</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Código fuente completo (.ino/.cpp)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Soporte por correo electrónico</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pricing Card -->
+                <div class="bg-white text-gray-900 rounded-2xl p-8 shadow-2xl max-w-md mx-auto w-full relative">
+                    <div
+                        class="absolute -top-4 right-4 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
+                        Oferta Especial
+                    </div>
+                    <div class="text-center mb-8">
+                        <p class="text-gray-500 font-medium">Acceso Completo</p>
+                        <div class="flex items-center justify-center gap-1 mt-2">
+                            <span class="text-5xl font-extrabold text-gray-900">$19.99</span>
+                            <span class="text-gray-400 font-medium self-end mb-2">USD</span>
+                        </div>
+                    </div>
+
+                    <!-- PayPal Container -->
+                    <div id="paypal-button-container" class="w-full min-h-[50px] mb-4"></div>
+
+                    <p class="text-center text-xs text-gray-400 mt-4">
+                        Pago seguro procesado por PayPal. Garantía de devolución de 7 días si no estás satisfecho.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white fade-in-section">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-center mb-12 text-gray-900">Preguntas Frecuentes</h2>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-2">¿Necesito conocimientos previos?</h3>
+                    <p class="text-gray-600 text-sm">Se recomienda tener nociones básicas de electrónica (soldar,
+                        conectar cables), pero la guía explica cada paso detalladamente.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-2">¿Cuánto cuesta el hardware necesario?</h3>
+                    <p class="text-gray-600 text-sm">Los componentes recomendados (ESP32 o similar) suelen costar entre
+                        $10 y $20 USD en total en tiendas como AliExpress o Amazon.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-2">¿Es legal construir esto?</h3>
+                    <p class="text-gray-600 text-sm">La construcción y el uso en entornos privados/blindados para
+                        pruebas educativas es generalmente permitido. El uso para interrumpir comunicaciones de terceros
+                        es ilegal en muchos países. Úsalo responsablemente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="font-bold text-lg text-gray-800">Jammer<span class="text-brand-600">Guide</span></span>
+                <p class="text-sm text-gray-500 mt-1">© 2026 Ecuaplus Logic. Todos los derechos reservados.</p>
+            </div>
+            <div class="flex gap-6 text-sm text-gray-500">
+                <a href="#" class="hover:text-gray-900">Términos</a>
+                <a href="#" class="hover:text-gray-900">Privacidad</a>
+                <a href="#" class="hover:text-gray-900">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Configuration (Must be loaded before main.js) -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
