@@ -9,7 +9,7 @@
 const CONFIG = {
     // Configuración de contacto
     WHATSAPP: {
-        NUMBER: '593963947466', // Formato internacional sin '+'
+        NUMBER: '593999921624', // Formato internacional sin '+'
         MESSAGE: 'Hola, deseo adquirir la Guía Bluetooth Educativa.'
     },
 
